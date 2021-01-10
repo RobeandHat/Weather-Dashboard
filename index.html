@@ -19,11 +19,12 @@
   </head>
   <body>
     <h1>Weather Dashboard</h1>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-3">
           <div class="input-group">
             <input
+              id="search"
               type="text"
               class="form-control"
               placeholder="Enter a location..."
@@ -31,10 +32,11 @@
             <button
               class="btn btn-outline-secondary fas fa-search"
               type="button"
-              id="button-addon2"
+              id="button"
             ></button>
           </div>
         </div>
+        <div class="col-md-9" id="weatherDiv"></div>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
