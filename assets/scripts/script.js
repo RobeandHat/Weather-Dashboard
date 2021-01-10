@@ -23,7 +23,19 @@ $(document).ready(function () {
       url: weatherApi,
       method: "GET",
     }).then(function (response) {
-      console.log(response);
+      var cityName = response.name;
+      var temp = (response.main.temp - 273.15) * 1.8 + 32;
+      var humidity = response.main.humidity;
+      var wind = response.wind.speed;
+      var iconCode = response.weather[0].icon;
+      var iconUrl = "https://openweathermap.org/img/wn/" + iconCode + "@2x.png";
+
+      $("#city").text(cityName);
+      $("#temp").text("Temperature: " + temp.toFixed(2) + " (F)");
+      $("#humidity").text("Humidity: " + humidity + "%");
+      $("#wind").text("Wind Speed: " + wind + " MPH");
+      //   $("#weatherDiv").append($("<img>").attr("src", iconUrl));
+      $("#wicon").attr("src", iconUrl);
     });
   });
 });
