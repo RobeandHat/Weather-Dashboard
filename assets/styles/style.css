@@ -1,3 +1,9 @@
-#test {
-  background-color: red;
+h1 {
+  text-align: center;
+  color: white;
+  background-color: #333;
+}
+
+.container {
+  margin: 0%;
 }
