@@ -4,16 +4,6 @@ $(document).ready(function () {
   //     input +
   //     "&appid=ab246c1d8eb84670d81cd395b2a799e9";
 
-  //   var uvApi =
-  //     "api.openweathermap.org/data/2.5/uvi?lat=" +
-  //     latitude +
-  //     "&lon=" +
-  //     longitude +
-  //     "&appid=ab246c1d8eb84670d81cd395b2a799e9";
-
-  // var longitude = response.coord.lon;
-  // var latitude = response.coord.lat;
-
   function citySearch() {
     $(".test").empty();
     $(".forecastCont").empty();
@@ -45,8 +35,35 @@ $(document).ready(function () {
       newButton.addClass("savedCity btn btn-outline-secondary container-fluid");
       newButton.attr("value", input);
       $(".searchedCities").append(newButton);
-      console.log(response.dt);
-      console.log(dateReal);
+
+      var longitude = response.coord.lon;
+      var latitude = response.coord.lat;
+
+      var uvApi =
+        "https://api.openweathermap.org/data/2.5/uvi?lat=" +
+        latitude +
+        "&lon=" +
+        longitude +
+        "&appid=ab246c1d8eb84670d81cd395b2a799e9";
+
+      $.ajax({
+        url: uvApi,
+        method: "GET",
+      }).then(function (uvResponse) {
+        $("#UV").text("UV Index: " + uvResponse.value);
+        if (parseInt(uvResponse.value) < 2) {
+          $("#UV").addClass("bg-success");
+        }
+        if (
+          parseInt(uvResponse.value) >= 2 &&
+          parseInt(uvResponse.value) <= 5
+        ) {
+          $("#UV").addClass("bg-warning");
+        }
+        if (parseInt(uvResponse.value) > 5) {
+          $("#UV").addClass("bg-danger");
+        }
+      });
     });
     //FORECAST //FORECAST//FORECAST//FORECAST//FORECAST//FORECAST//FORECAST
     var forecastApi =
@@ -122,6 +139,79 @@ $(document).ready(function () {
       $("#humidity").text("Humidity: " + humidity + "%");
       $("#wind").text("Wind Speed: " + wind + " MPH");
       $("#wicon").attr("src", iconUrl);
+
+      var longitude = response.coord.lon;
+      var latitude = response.coord.lat;
+
+      var uvApi =
+        "https://api.openweathermap.org/data/2.5/uvi?lat=" +
+        latitude +
+        "&lon=" +
+        longitude +
+        "&appid=ab246c1d8eb84670d81cd395b2a799e9";
+
+      $.ajax({
+        url: uvApi,
+        method: "GET",
+      }).then(function (uvResponse) {
+        $("#UV").text("UV Index: " + uvResponse.value);
+        if (parseInt(uvResponse.value) < 2) {
+          $("#UV").addClass("bg-success");
+        }
+        if (
+          parseInt(uvResponse.value) >= 2 &&
+          parseInt(uvResponse.value) <= 5
+        ) {
+          $("#UV").addClass("bg-warning");
+        }
+        if (parseInt(uvResponse.value) > 5) {
+          $("#UV").addClass("bg-danger");
+        }
+      });
+    });
+    var forecastApi =
+      "https://api.openweathermap.org/data/2.5/forecast?q=" +
+      input +
+      "&appid=ab246c1d8eb84670d81cd395b2a799e9";
+
+    $.ajax({
+      url: forecastApi,
+      method: "GET",
+    }).then(function (forecast) {
+      var forecastArray = [
+        forecast.list[6],
+        forecast.list[14],
+        forecast.list[22],
+        forecast.list[30],
+        forecast.list[38],
+      ];
+
+      for (let i = 0; i < forecastArray.length; i++) {
+        var forecastHumid = forecastArray[i].main.humidity;
+        var humidDiv = $("<div>").text("Humidity: " + forecastHumid + "%");
+
+        var fixedTemp = (forecastArray[i].main.temp - 273.15) * 1.8 + 32;
+        var tempDivs = $("<div>").text(
+          "Temperature: " + fixedTemp.toFixed(2) + " (F)"
+        );
+
+        var forecastDate = new Date(
+          forecastArray[i].dt * 1000
+        ).toLocaleDateString("en-US");
+
+        var forecastDateDiv = $("<div>").text(forecastDate);
+
+        var fIconUrl =
+          "https://openweathermap.org/img/wn/" +
+          forecastArray[i].weather[0].icon +
+          "@2x.png";
+        var forecastIcon = $("<img>").attr("src", fIconUrl);
+
+        var div = $("<div>");
+        div.addClass("col-md");
+        div.append(forecastDateDiv, tempDivs, humidDiv, forecastIcon);
+        $(".forecastCont").append(div);
+      }
     });
   }
 

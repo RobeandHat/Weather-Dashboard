@@ -18,11 +18,24 @@ h1 {
   width: 100px;
 }
 
-.test {
-  background-color: red;
-}
-
 .float {
   float: left;
   margin-left: 15px;
 }
+
+#UV {
+  background-color: red;
+  display: inline-block;
+}
+
+/* .low {
+}
+
+.moderate {
+}
+
+.high {
+}
+
+.veryHigh {
+} */
