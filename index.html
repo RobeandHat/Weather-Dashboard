@@ -15,13 +15,13 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="assets/styles/style.css" />
-    <title>Work Day Scheduler</title>
+    <title>Weather Dashboard</title>
   </head>
   <body>
     <h1>Weather Dashboard</h1>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 searchedCities">
           <div class="input-group">
             <input
               id="search"
@@ -41,8 +41,14 @@
           <div id="temp"></div>
           <div id="humidity"></div>
           <div id="wind"></div>
-          <img id="wicon" src="https://www.foxcubgames.com/wp-content/uploads/2019/02/transparent-square.png" alt="Weather icon">
+          <img id="wicon" class = "place" src="https://www.foxcubgames.com/wp-content/uploads/2019/02/transparent-square.png" alt="Weather icon">
         </div>
+        </div>
+
+        <!--QUESTION. HOW DO I ACCESS THE ARRAY WITH A LOOP SOMEHOW-->
+        <div class = "row forecastCont">
+          <div class = "col-md-3"></div>
+    
         </div>
       </div>
     </div>

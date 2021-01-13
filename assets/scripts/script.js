@@ -15,6 +15,8 @@ $(document).ready(function () {
   // var latitude = response.coord.lat;
 
   function citySearch() {
+    $(".test").empty();
+    $(".forecastCont").empty();
     var input = $("#search").val();
     var weatherApi =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -26,26 +28,76 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       var cityName = response.name;
+      var dateReal = new Date(response.dt * 1000).toLocaleDateString("en-US");
       var temp = (response.main.temp - 273.15) * 1.8 + 32;
       var humidity = response.main.humidity;
       var wind = response.wind.speed;
       var iconCode = response.weather[0].icon;
       var iconUrl = "https://openweathermap.org/img/wn/" + iconCode + "@2x.png";
 
-      $("#city").text(cityName);
+      $("#city").text(cityName + "  " + dateReal);
       $("#temp").text("Temperature: " + temp.toFixed(2) + " (F)");
       $("#humidity").text("Humidity: " + humidity + "%");
       $("#wind").text("Wind Speed: " + wind + " MPH");
       $("#wicon").attr("src", iconUrl);
 
       var newButton = $("<button>").text(input);
-      newButton.addClass("savedCity");
+      newButton.addClass("savedCity btn btn-outline-secondary container-fluid");
       newButton.attr("value", input);
-      $(".col-md-3").append(newButton);
+      $(".searchedCities").append(newButton);
+      console.log(response.dt);
+      console.log(dateReal);
+    });
+    //FORECAST //FORECAST//FORECAST//FORECAST//FORECAST//FORECAST//FORECAST
+    var forecastApi =
+      "https://api.openweathermap.org/data/2.5/forecast?q=" +
+      input +
+      "&appid=ab246c1d8eb84670d81cd395b2a799e9";
+
+    $.ajax({
+      url: forecastApi,
+      method: "GET",
+    }).then(function (forecast) {
+      var forecastArray = [
+        forecast.list[6],
+        forecast.list[14],
+        forecast.list[22],
+        forecast.list[30],
+        forecast.list[38],
+      ];
+
+      for (let i = 0; i < forecastArray.length; i++) {
+        var forecastHumid = forecastArray[i].main.humidity;
+        var humidDiv = $("<div>").text("Humidity: " + forecastHumid + "%");
+
+        var fixedTemp = (forecastArray[i].main.temp - 273.15) * 1.8 + 32;
+        var tempDivs = $("<div>").text(
+          "Temperature: " + fixedTemp.toFixed(2) + " (F)"
+        );
+
+        var forecastDate = new Date(
+          forecastArray[i].dt * 1000
+        ).toLocaleDateString("en-US");
+
+        var forecastDateDiv = $("<div>").text(forecastDate);
+
+        var fIconUrl =
+          "https://openweathermap.org/img/wn/" +
+          forecastArray[i].weather[0].icon +
+          "@2x.png";
+        var forecastIcon = $("<img>").attr("src", fIconUrl);
+
+        var div = $("<div>");
+        div.addClass("col-md");
+        div.append(forecastDateDiv, tempDivs, humidDiv, forecastIcon);
+        $(".forecastCont").append(div);
+      }
     });
   }
 
   function savedCitySearch() {
+    $(".test").empty();
+    $(".forecastCont").empty();
     var input = $(this).val();
 
     var weatherApi =
@@ -58,13 +110,14 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       var cityName = response.name;
+      var dateReal = new Date(response.dt * 1000).toLocaleDateString("en-US");
       var temp = (response.main.temp - 273.15) * 1.8 + 32;
       var humidity = response.main.humidity;
       var wind = response.wind.speed;
       var iconCode = response.weather[0].icon;
       var iconUrl = "https://openweathermap.org/img/wn/" + iconCode + "@2x.png";
 
-      $("#city").text(cityName);
+      $("#city").text(cityName + "  " + dateReal);
       $("#temp").text("Temperature: " + temp.toFixed(2) + " (F)");
       $("#humidity").text("Humidity: " + humidity + "%");
       $("#wind").text("Wind Speed: " + wind + " MPH");

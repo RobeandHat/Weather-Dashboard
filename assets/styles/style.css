@@ -4,6 +4,25 @@ h1 {
   background-color: #333;
 }
 
-.container {
-  margin: 0%;
+.savedCity {
+  margin-top: 4px;
+}
+
+.form-control:focus {
+  border-color: rgb(133, 133, 133);
+  box-shadow: none;
+}
+
+.place {
+  height: 100px;
+  width: 100px;
+}
+
+.test {
+  background-color: red;
+}
+
+.float {
+  float: left;
+  margin-left: 15px;
 }
