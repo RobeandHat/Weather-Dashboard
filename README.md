@@ -6,7 +6,7 @@ This is code for a weather dashboard that allows the user to pull weather data o
 
 ## Link to deployed code
 
-[Day Planner](https://robeandhat.github.io/Weather-Dashboard/)
+[Weather Dashboard](https://robeandhat.github.io/Weather-Dashboard/)
 
 ## Website Screenshot
 
