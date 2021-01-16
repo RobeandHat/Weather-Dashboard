@@ -1,3 +1,7 @@
+body {
+  background-color: #dad8d8;
+}
+
 h1 {
   text-align: center;
   color: white;
@@ -24,18 +28,29 @@ h1 {
 }
 
 #UV {
-  background-color: red;
   display: inline-block;
 }
 
-/* .low {
+.bg-light {
+  margin-right: 10px;
+  border-radius: 25px;
 }
 
-.moderate {
+.bg-secondary {
+  margin-right: 10px;
+  border-radius: 25px;
 }
 
-.high {
+#weatherDiv {
+  margin-bottom: 10px;
+  padding: 15px;
 }
 
-.veryHigh {
-} */
+.searchedCities {
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.hidden {
+  display: none;
+}

@@ -21,7 +21,7 @@
     <h1>Weather Dashboard</h1>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-3 searchedCities">
+        <div class="col-md-3 searchedCities bg-light">
           <div class="input-group">
             <input
               id="search"
@@ -36,7 +36,7 @@
             ></button>
           </div>
         </div>
-        <div class="col-md-9" id="weatherDiv">
+        <div class="col-md-2 bg-secondary btn-outline-light hidden" id="weatherDiv">
           <div id="city"></div>
           <div id="temp"></div>
           <div id="humidity"></div>
@@ -44,9 +44,10 @@
           <div id="UV"></div>
           <img id="wicon" class = "place" src="https://www.foxcubgames.com/wp-content/uploads/2019/02/transparent-square.png" alt="Weather icon">
         </div>
+        <div class= "col-md-10"></div>
         </div>
 
-        <!--QUESTION. HOW DO I ACCESS THE ARRAY WITH A LOOP SOMEHOW-->
+      
         <div class = "row forecastCont">
           <div class = "col-md-3"></div>
     

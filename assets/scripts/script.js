@@ -1,9 +1,4 @@
 $(document).ready(function () {
-  //   var forecastApi =
-  //     "api.openweathermap.org/data/2.5/forecast?q=" +
-  //     input +
-  //     "&appid=ab246c1d8eb84670d81cd395b2a799e9";
-
   function citySearch() {
     $(".test").empty();
     $(".forecastCont").empty();
@@ -24,7 +19,7 @@ $(document).ready(function () {
       var wind = response.wind.speed;
       var iconCode = response.weather[0].icon;
       var iconUrl = "https://openweathermap.org/img/wn/" + iconCode + "@2x.png";
-
+      $("#weatherDiv").removeClass("hidden");
       $("#city").text(cityName + "  " + dateReal);
       $("#temp").text("Temperature: " + temp.toFixed(2) + " (F)");
       $("#humidity").text("Humidity: " + humidity + "%");
@@ -32,7 +27,9 @@ $(document).ready(function () {
       $("#wicon").attr("src", iconUrl);
 
       var newButton = $("<button>").text(input);
-      newButton.addClass("savedCity btn btn-outline-secondary container-fluid");
+      newButton.addClass(
+        "savedCity btn btn-outline-light container-fluid bg-secondary"
+      );
       newButton.attr("value", input);
       $(".searchedCities").append(newButton);
 
@@ -105,7 +102,7 @@ $(document).ready(function () {
         var forecastIcon = $("<img>").attr("src", fIconUrl);
 
         var div = $("<div>");
-        div.addClass("col-md");
+        div.addClass("col-md btn-outline-light container-fluid bg-secondary");
         div.append(forecastDateDiv, tempDivs, humidDiv, forecastIcon);
         $(".forecastCont").append(div);
       }
@@ -208,7 +205,7 @@ $(document).ready(function () {
         var forecastIcon = $("<img>").attr("src", fIconUrl);
 
         var div = $("<div>");
-        div.addClass("col-md");
+        div.addClass("col-md btn-outline-light container-fluid bg-secondary");
         div.append(forecastDateDiv, tempDivs, humidDiv, forecastIcon);
         $(".forecastCont").append(div);
       }
