@@ -54,3 +54,7 @@ h1 {
 .hidden {
   display: none;
 }
+
+.margin {
+  margin-top: 10px;
+}

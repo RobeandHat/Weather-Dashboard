@@ -1,5 +1,6 @@
 $(document).ready(function () {
   function citySearch() {
+    //empties divs of dynamically created content
     $(".test").empty();
     $(".forecastCont").empty();
     var input = $("#search").val();
@@ -62,12 +63,12 @@ $(document).ready(function () {
         }
       });
     });
-    //FORECAST //FORECAST//FORECAST//FORECAST//FORECAST//FORECAST//FORECAST
+    //Creates the forecast section
     var forecastApi =
       "https://api.openweathermap.org/data/2.5/forecast?q=" +
       input +
       "&appid=ab246c1d8eb84670d81cd395b2a799e9";
-
+    //loops through 5 days of forecasts at the same time of day
     $.ajax({
       url: forecastApi,
       method: "GET",
@@ -102,13 +103,15 @@ $(document).ready(function () {
         var forecastIcon = $("<img>").attr("src", fIconUrl);
 
         var div = $("<div>");
-        div.addClass("col-md btn-outline-light container-fluid bg-secondary");
+        div.addClass(
+          "col-md btn-outline-light container-fluid bg-secondary margin"
+        );
         div.append(forecastDateDiv, tempDivs, humidDiv, forecastIcon);
         $(".forecastCont").append(div);
       }
     });
   }
-
+  //does the same thing as the search button, but on saved click
   function savedCitySearch() {
     $(".test").empty();
     $(".forecastCont").empty();
@@ -170,7 +173,7 @@ $(document).ready(function () {
       "https://api.openweathermap.org/data/2.5/forecast?q=" +
       input +
       "&appid=ab246c1d8eb84670d81cd395b2a799e9";
-
+    //loops through 5 days of forecasts at the same time of day
     $.ajax({
       url: forecastApi,
       method: "GET",
@@ -205,7 +208,9 @@ $(document).ready(function () {
         var forecastIcon = $("<img>").attr("src", fIconUrl);
 
         var div = $("<div>");
-        div.addClass("col-md btn-outline-light container-fluid bg-secondary");
+        div.addClass(
+          "col-md btn-outline-light container-fluid bg-secondary margin"
+        );
         div.append(forecastDateDiv, tempDivs, humidDiv, forecastIcon);
         $(".forecastCont").append(div);
       }
